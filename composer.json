@@ -1,0 +1,45 @@
+{
+    "name": "cas-system/laravel-client",
+    "description": "Laravel client package for CAS (Central Authentication Service) integration",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "CAS System",
+            "email": "support@cas-system.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2|^7.3|^7.4|^8.0",
+        "laravel/framework": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+        "firebase/php-jwt": "^6.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CasSystem\\LaravelClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CasSystem\\LaravelClient\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CasSystem\\LaravelClient\\CasClientServiceProvider"
+            ],
+            "aliases": {
+                "CasClient": "CasSystem\\LaravelClient\\Facades\\CasClient"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
