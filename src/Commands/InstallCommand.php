@@ -35,17 +35,12 @@ class InstallCommand extends Command
             '--force' => true,
         ]);
 
-        // 2. Publish Migrations
-        $this->info('Publishing migrations...');
-        $this->call('vendor:publish', [
-            '--tag' => 'cas-client-migrations', // Assuming you have this tag or just rely on loadMigrationsFrom
-        ]);
-
-        // 3. Setup User Model
+        // 2. Setup User Model. The package migration is registered through
+        // loadMigrationsFrom(), so it does not need to be published.
         $userModelPath = $this->ask('Where is your User model located?', 'app/Models/User.php');
         $this->setupUserModel($userModelPath);
 
-        // 4. Update .env
+        // 3. Update .env
         $this->updateEnvFile();
 
         $this->info('CAS Client installed successfully!');

@@ -3,7 +3,7 @@
     "description": "Laravel client package for CAS (Central Authentication Service) integration",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "CAS System",

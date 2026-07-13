@@ -19,7 +19,7 @@ class CasAuthentication
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, Closure $next, string $guard = null): mixed
+    public function handle(Request $request, Closure $next, ?string $guard = null): mixed
     {
         // 1. Check if user is already authenticated in Laravel session
         if (Auth::guard($guard)->check()) {
