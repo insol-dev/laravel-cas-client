@@ -106,9 +106,9 @@ return [
 
     'user' => [
         // Automatically create/update a local User record upon successful CAS login
-        'create_local_users' => true,
+        'create_local_users' => env('CAS_CREATE_LOCAL_USERS', true),
 
-        // The Eloquent User model to use (Ensure it uses CasUserTrait)
+        // The Eloquent User model used for optional local login/provisioning.
         'model' => env('CAS_USER_MODEL', 'App\Models\Auth\User'),
 
         'defaults' => [

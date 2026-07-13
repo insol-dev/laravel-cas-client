@@ -32,17 +32,12 @@ composer require cas-system/laravel-client
 php artisan cas:install
 ```
 
-The installer publishes the config, adds the `CasUserTrait` to your User model and seeds the required `.env` keys. Then run the migration that adds the CAS columns to the `users` table:
-
-```bash
-php artisan migrate
-```
+The installer publishes the config and seeds the required `.env` keys. The package stores CAS authentication state in Laravel's session and cache, so it does **not** add database columns and you do **not** need to run a package migration.
 
 Prefer to do it by hand? Publish just the config with the `cas-client-config` tag:
 
 ```bash
 php artisan vendor:publish --tag=cas-client-config
-php artisan migrate
 ```
 
 ### 3. Configure Environment Variables
@@ -54,6 +49,7 @@ Add the following to your `.env` file. The `client_id` / `client_secret` are iss
 CAS_SERVER_URL=http://127.0.0.1:8001
 CAS_CLIENT_ID=your_client_id
 CAS_CLIENT_SECRET=your_client_secret
+CAS_CREATE_LOCAL_USERS=true
 
 # Callback the browser is sent back to after login
 CAS_CALLBACK_URL=https://yourapp.com/cas/callback
@@ -209,7 +205,7 @@ CAS_VERIFY_SSL=true                               # Verify SSL certificates
 
 # Optional Settings
 CAS_TIMEOUT=30                                     # HTTP request timeout (seconds)
-CAS_USER_MODEL=App\Models\User                     # Eloquent User model (uses CasUserTrait)
+CAS_USER_MODEL=App\Models\User                     # Eloquent model for optional local login/provisioning
 CAS_USER_DASHBOARD=/dashboard                      # Redirect target after login
 CAS_ROUTES_ENABLED=true                            # Register the package's /cas/* routes
 CAS_CACHE_ENABLED=true                            # Enable user data caching
@@ -225,7 +221,7 @@ Edit `config/cas-client.php` for advanced options:
 return [
     // User management — a local User record is found/created on successful login
     'user' => [
-        'create_local_users' => true,
+        'create_local_users' => env('CAS_CREATE_LOCAL_USERS', true),
         'model' => env('CAS_USER_MODEL', 'App\Models\Auth\User'),
         'defaults' => [
             'user_type' => 'Guest',

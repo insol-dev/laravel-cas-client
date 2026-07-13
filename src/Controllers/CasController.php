@@ -70,7 +70,6 @@ class CasController extends Controller
                     $localUser->name = $user['name'] ?? $user['username'];
                     $localUser->email = $user['email'];
                     $localUser->password = bcrypt(str()->random(16));
-                    $localUser->cas_user = true; // Mark as CAS user
                     $localUser->save();
                     logger()->info('New user created', ['id' => $localUser->id]);
                 } else {

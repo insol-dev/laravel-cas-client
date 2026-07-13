@@ -56,11 +56,6 @@ class CasClientServiceProvider extends ServiceProvider
             __DIR__.'/../routes/cas-client.php' => base_path('routes/cas-client.php'),
         ], 'cas-client-routes');
 
-        // Load Migrations
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
-
-
         // Load routes
         if (config('cas-client.routes.enabled', true)) {
             $this->loadRoutesFrom(__DIR__.'/../routes/cas-client.php');
